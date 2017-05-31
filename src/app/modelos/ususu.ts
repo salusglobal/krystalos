@@ -1,0 +1,30 @@
+export class Ususu {
+  constructor(
+       public COMPANIA: string = '',
+       public USUARIO: string = '',
+       public CLAVE: string = '',
+       public NOMBRE: string = '',
+       public GRUPO: string = '',
+       public TIPO: string = '',
+       public IDMEDICO: string = '',
+       public NIVELFUNCIONARIO: string = '',
+       public CODCAJERO: string = '',
+       public SYS_ComputerName: string = '',
+       public FECHACAMBIO: string = '',
+       public ESTADO: string = '',
+       public ESMEDICO: string = '',
+       public IDSEDE: string = '',
+       public IDIMAGEN: string = '',
+       public CARGO: string = '',
+       public TELEFONO: string = '',
+       public CELULAR: string = '',
+       public FECHAVENCE: string = '',
+       public CONECTADO: string = '',
+       public SYS_COMP_CONECTADO: string = '',
+       public FECHACONEC: string = '',
+       public KEYUSER1: string = '',
+       public IDTERCERO: string = '',
+       public IDFIRMA: string = '',
+       public TOKEN: string = ''
+  ) {}
+}
