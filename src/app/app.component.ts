@@ -14,13 +14,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   public usuario: Ususu = new Ususu();
   public usuarios: Ususu[] = [];
   constructor( private _helper: Helper, private _ususuService: UsusuService ) {
-    this._ususuService.get('')
-    .subscribe(
-            usuarios => {
-              this.usuarios = usuarios;
-              // console.log(this.usuarios);
-            }
-          );
+    // this._ususuService.get('')
+    // .subscribe(
+    //         usuarios => {
+    //           this.usuarios = usuarios;
+    //           // console.log(this.usuarios);
+    //         }
+    //       );
   }
   ngOnInit() {
     if (this.usuario.NOMBRE === '') {

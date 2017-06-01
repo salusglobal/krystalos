@@ -53,26 +53,31 @@ export class IngresarComponent implements OnInit {
   }
   onSubmit() {
     this.validaciones();
-    if (this.formValido) {
+    if (!this.formValido) {
       return false;
     }
-    // this._helper.notificacion(this.usuario, 'Usuario', 'info');
-    // this._helper.notificacion(this.clave, 'Clave', 'info');
-    this._autenticacionService.login(this.compania, this.usuario, this.clave)
+    // console.log('Compania Elegida: ');
+    // console.log(this.companiaElegida);
+    // let retornar: boolean;
+    // retornar = true;
+    // if (retornar) {
+    //   return false;
+    // }
+    this._autenticacionService.login(this.companiaElegida, this.usuario, this.clave)
       .subscribe(
         success => {
           if (success) {
             location.reload();
-          }else{
-            this._helper.notificacion('Usuario y Contraseña no Coinciden', 'Ingreso al sistema', 'info');
+          }else {
+            // this._helper.notificacion('Usuario y Contraseña no Coinciden', 'Ingreso al sistema', 'info');
           }
         }
-      )
+      );
 
     return false;
   }
 
-  public getCompania(){
+  public getCompania() {
     this.companiaElegida = new Cia();
     this.companias.forEach(compania => {
       if (compania.COMPANIA.toUpperCase() === this.compania.toUpperCase()) {

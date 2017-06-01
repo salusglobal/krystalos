@@ -1,7 +1,7 @@
 <?php
 use App\Model\UsusuModel;
 use App\Lib\Tokens;
-
+use App\Lib\Response;
 $app->group('/ususu/', function () {
 
     $this->get('test', function ($req, $res, $args) {
@@ -28,7 +28,7 @@ $app->group('/ususu/', function () {
          $usuario =  $args["usuario"];
         }
         // var_dump($usuario);
-        $um = new UsusuModel();
+        $um = new UsusuModel("SERVERSGP","KWDEV","SA","SGPserver01*");
 
         return $res
            ->withHeader('Content-type', 'application/json')
@@ -41,37 +41,56 @@ $app->group('/ususu/', function () {
 
     });
 
-    $this->get('autenticar', function ($req, $res, $args) {
-        /*
-        $json = $request->getParsedBody();
-        $data = json_decode($json['json'],true);
+    $this->post('autenticar', function ($req, $res, $args) {
+        // /*
+        // $json = $request->getParsedBody();
+        // $data = json_decode($json['json'],true);
 
-        $compania = $data['compania'];
-        $usuario = $data['usuario'];
-        $clave = $data['clave'];
+        // $servidor = $data['servidor'];
+        // $dbbase = $data['dbbase'];
+        // $usuario = $data['usuario'];
+        // $clave = $data['clave'];
 
-        if($usuario===''||$compania===''||$clave===''){
-          $this->response->setResponse(false, 'Campos vacíos');
-          return $this->response;
-        }
-        */
-        $compania='01';
-        $usuario='jjimenez';
-        $clave='JUAN11';
+        // if($usuario===''||$compania===''||$clave===''){
+        //   $this->response->setResponse(false, 'Campos vacíos');
+        //   return $this->response;
+        // }
+        // */
+        // $servidor = 'SERVERSGP';
+        // $compania='01';
+        // $dbbase='KWDEV';
+        // $usuario='jjimenez';
+        // $clave='JUAN11';
+        // $usuario='sa';
+        // $clave='SGPserver01*';
+
+
+        // $um = new UsusuModel($servidor,$dbbase,$usuario,$clave);
+        $usuario = 'jjimenez';
+        $um = new UsusuModel("SERVERSGP","KWDEV","SA","SGPserver01*");
+        return $res
+           ->withHeader('Content-type', 'application/json')
+           ->getBody()
+           ->write(
+                json_encode(
+                    $um->Get($usuario)
+                )
+            );
 
 
 
-        $um = new UsusuModel();
-        $u = $um->Get($usuario);
-        // var_dump($usuario->result[0]);
 
-        if($usuario!==$u->usuario||$clave!==$u->clave){
-          $this->response->setResponse(false, 'Usuario y contraseña no coinciden. Intentelo de nuevo.');
-          return $this->response;
-        }
+        // if($usuario!==$u->usuario||$clave!==$u->clave){
+        //   $um->response->setResponse(false, 'Usuario y contraseña no coinciden. Intentelo de nuevo.');
+        //   // return $this->response;
+        //   return $res
+        //    ->withHeader('Content-type', 'application/json')
+        //    ->getBody()
+        //    ;
+        // }
 
-        $tokens = new Tokens();
-        $data = array('compania' => $compania, 'usuario' => $usuario, 'clave' => $clave);
+        // $tokens = new Tokens();
+        // $data = array('compania' => $compania, 'usuario' => $usuario, 'clave' => $clave);
 
 
     });

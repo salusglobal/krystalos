@@ -27,6 +27,7 @@ class CiaModel
           [TELEFONOS], [DSN], [IDSGSSS], [CIUDAD], [SERVIDOR_DBBASE], [DB_BASE], [SERVIDOR_DBLOG], [DB_LOG]
         FROM $this->table
         WHERE ". $where ;
+        $sql = "EXEC SPK_CIAListarCIA '".$compania."'";
         $stm = $this->db->prepare($sql);
         $stm->execute();
         $this->response->setResponse(true);

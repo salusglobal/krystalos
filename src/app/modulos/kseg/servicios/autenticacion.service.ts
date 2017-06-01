@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Helper } from '../../../helpers/helper';
+import { Cia } from './../../../modelos/cia';
 @Injectable()
 export class AutenticacionService {
   public usuario: Model = new Model();
@@ -15,13 +16,14 @@ export class AutenticacionService {
   /**
    * login
    */
-  public login(compania: string, usuario: string, clave: string): Observable<boolean> {
-    const json = JSON.stringify({ compania: compania, usuario: usuario, clave: clave });
+  public login(compania: Cia, usuario: string, clave: string): Observable<boolean> {
+    const json = JSON.stringify({ compania: compania.COMPANIA, servidor: compania.SERVIDOR_DBBASE,
+      dbbase: compania.DB_BASE, usuario: usuario, clave: clave });
     const params = 'json=' + json;
     const headers = new Headers({
         'Content-Type': 'application/x-www-form-urlencoded'
       });
-    return this._http.post(environment.apiurl + '/kseg/autenticar', params, {headers: headers} )
+    return this._http.post(environment.apiurl + '/ususu/autenticar', params, {headers: headers} )
       .map(
         (response: Response )  => {
           // console.log(response.json());

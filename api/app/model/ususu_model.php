@@ -8,20 +8,18 @@ class UsusuModel
 {
     private $db;
     private $table = 'ususu';
-    private $response;
+    public $response;
 
-    public function __CONSTRUCT()
+    public function __CONSTRUCT($servidor,$dbbase,$usuario,$clave)
     {
-        $this->db = Database::StartUp();
+        $this->db = Database::StartUp($servidor,$dbbase,$usuario,$clave);
         $this->response = new Response();
     }
 
     public function Get($usuario)
     {
-      $where=' USUARIO = USUARIO ';
-      if(isset($usuario)&&$usuario!=""){
-        $where = " USUARIO = '".$usuario."'";
-      }
+      $usuario='jjimenez';
+      $where = " USUARIO = CASE WHEN ISNULL('".$usuario."','') = '' THEN USUARIO ELSE '".$usuario."' END ";
       try
       {
         $result = array();

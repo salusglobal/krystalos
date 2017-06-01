@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiurl: 'http://localhost:8084/Krystalos/api/public',
+  apiurl: 'http://localhost:8082/krystalos/api/public',
   nombreapp: 'Krystalos',
   nombreappmin: 'K+',
   nombrecompany: 'SALUS GLOBAL PARTNERS',
