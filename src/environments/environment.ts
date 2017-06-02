@@ -9,5 +9,6 @@ export const environment = {
   nombreapp: 'Krystalos',
   nombreappmin: 'K+',
   nombrecompany: 'SALUS GLOBAL PARTNERS',
-  vigencialicencia: '2017'
+  vigencialicencia: '2017',
+  currentuser: 'krywebuser'
 };

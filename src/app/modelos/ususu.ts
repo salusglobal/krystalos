@@ -11,7 +11,7 @@ export class Ususu {
        public CODCAJERO: string = '',
        public SYS_ComputerName: string = '',
        public FECHACAMBIO: string = '',
-       public ESTADO: string = '',
+       public ESTADO: string = 'Inactivo',
        public ESMEDICO: string = '',
        public IDSEDE: string = '',
        public IDIMAGEN: string = '',

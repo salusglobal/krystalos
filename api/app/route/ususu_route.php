@@ -1,6 +1,5 @@
 <?php
 use App\Model\UsusuModel;
-use App\Lib\Tokens;
 use App\Lib\Response;
 $app->group('/ususu/', function () {
 
@@ -42,20 +41,13 @@ $app->group('/ususu/', function () {
     });
 
     $this->post('autenticar', function ($req, $res, $args) {
-        // /*
-        // $json = $request->getParsedBody();
-        // $data = json_decode($json['json'],true);
+        $json = $req->getParsedBody();
+        $data = json_decode($json['json'],true);
+        $servidor = $data['servidor'];
+        $dbbase = $data['dbbase'];
+        $usuario = $data['usuario'];
+        $clave = $data['clave'];
 
-        // $servidor = $data['servidor'];
-        // $dbbase = $data['dbbase'];
-        // $usuario = $data['usuario'];
-        // $clave = $data['clave'];
-
-        // if($usuario===''||$compania===''||$clave===''){
-        //   $this->response->setResponse(false, 'Campos vacíos');
-        //   return $this->response;
-        // }
-        // */
         // $servidor = 'SERVERSGP';
         // $compania='01';
         // $dbbase='KWDEV';
@@ -65,29 +57,32 @@ $app->group('/ususu/', function () {
         // $clave='SGPserver01*';
 
 
-        // $um = new UsusuModel($servidor,$dbbase,$usuario,$clave);
-        $usuario = 'jjimenez';
-        $um = new UsusuModel("SERVERSGP","KWDEV","SA","SGPserver01*");
+        try{
+          $um = new UsusuModel($servidor,$dbbase,$usuario,$clave);
+        }catch(Exception $e){
+          $response = new Response();
+          $response -> SetResponse (false, 'Imposible establecer conexión.');
+          return $res
+            ->withHeader('Content-type', 'application/json')
+            ->getBody()
+            ->write(
+                  json_encode(
+                      $response
+                  )
+              );
+        }
+
         return $res
            ->withHeader('Content-type', 'application/json')
            ->getBody()
            ->write(
                 json_encode(
-                    $um->Get($usuario)
+                    $um->Autenticar($usuario,$clave)
                 )
             );
 
 
 
-
-        // if($usuario!==$u->usuario||$clave!==$u->clave){
-        //   $um->response->setResponse(false, 'Usuario y contraseña no coinciden. Intentelo de nuevo.');
-        //   // return $this->response;
-        //   return $res
-        //    ->withHeader('Content-type', 'application/json')
-        //    ->getBody()
-        //    ;
-        // }
 
         // $tokens = new Tokens();
         // $data = array('compania' => $compania, 'usuario' => $usuario, 'clave' => $clave);
